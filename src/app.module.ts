@@ -5,6 +5,8 @@ import { BookModule } from "./book/book.module";
 import { SharedModule } from './shared/shared.module';
 import { ConfigModule } from '@nestjs/config';
 import { config } from 'dotenv';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 import typeorm from './config/databaseConfig';
 
 
@@ -17,7 +19,7 @@ config();
       envFilePath: ['.env', `.env.${process.env.NODE_ENV}`],
       load: [typeorm],
     }),
-      BookModule,SharedModule],
+      BookModule,SharedModule, AuthModule, UserModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,26 +1,50 @@
-import { Injectable } from "@nestjs/common";
-import { CreateBookDto } from "./dto/create-book.dto";
-import { UpdateBookDto } from "./dto/update-book.dto";
+import { Injectable } from '@nestjs/common';
+import { CreateBookDto } from './dto/create-book.dto';
+import { UpdateBookDto } from './dto/update-book.dto';
 
 @Injectable()
 export class BookService {
-  create(createBookDto: CreateBookDto) {
-    return "This action adds a new book";
+  private books = [];
+
+  create(bookData: CreateBookDto) {
+    const newBook = { id: this.books.length + 1, ...bookData };
+    this.books.push(newBook);
+    return newBook;
   }
 
-  findAll() {
-    return `This action returns all book`;
+  findAll(page: number, limit: number, search?: string) {
+    let filteredBooks = this.books;
+
+    if (search) {
+      filteredBooks = this.books.filter((book) =>
+          book.title.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+
+    const start = (page - 1) * limit;
+    const end = start + limit;
+    return {
+      total: filteredBooks.length,
+      page,
+      limit,
+      books: filteredBooks.slice(start, end),
+    };
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} book`;
+    return this.books.find((book) => book.id === id);
   }
 
-  update(id: number, updateBookDto: UpdateBookDto) {
-    return `This action updates a #${id} book`;
+  update(id: number, updateData: UpdateBookDto) {
+    const bookIndex = this.books.findIndex((book) => book.id === id);
+    if (bookIndex === -1) return null;
+
+    this.books[bookIndex] = { ...this.books[bookIndex], ...updateData };
+    return this.books[bookIndex];
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} book`;
+  delete(id: number) {
+    this.books = this.books.filter((book) => book.id !== id);
+    return { message: 'Book deleted successfully' };
   }
 }
