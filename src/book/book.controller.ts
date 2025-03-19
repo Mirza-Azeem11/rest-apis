@@ -19,7 +19,8 @@ import {
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
-import {JwtAuthGuard} from "@/auth/guards/local-auth.guard";
+import { JwtAuthGuard } from "../auth/guards/local-auth.guard";
+
 
 @ApiTags('Book') // Groups in Swagger
 @ApiBearerAuth()
