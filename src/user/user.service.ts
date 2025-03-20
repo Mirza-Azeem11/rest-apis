@@ -5,7 +5,7 @@ import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { NOT_FOUND_RESPONSE } from '@/common/constants/http-responses.types';
 import { AuthDto } from '../auth/dto/auth.dto';
-import { Helper } from '@/utils';
+import { Helper } from '../utils';
 
 @Injectable()
 export class UserService {

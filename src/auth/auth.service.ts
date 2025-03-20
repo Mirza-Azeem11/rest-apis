@@ -4,7 +4,7 @@ import { AuthDto } from './dto/auth.dto';
 import { JwtPayload } from './interface/Jwt.interface';
 import { UserService } from '../user/user.service';
 import { RegisterUserDto } from './dto/registration.dto';
-import { Helper as helper } from '@/utils';
+import { Helper as helper } from '../utils';
 
 import { ConfigService } from '@nestjs/config';
 

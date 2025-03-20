@@ -1,4 +1,4 @@
-import { Helper } from '@/utils';
+import { Helper } from '../utils';
 import { Entity, Column, BeforeInsert } from 'typeorm';
 import Model from './base.entity';
 
